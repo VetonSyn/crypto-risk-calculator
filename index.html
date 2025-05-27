@@ -36,6 +36,7 @@
             background-color: #001f4d;
             color: white;
         }
+
         .highlight-green-dark {
             background-color: #abdeb0;
             color: #155724;
@@ -69,11 +70,18 @@
                     <div class="row g-3 justify-content-start">
                         <div class="col-md-4">
                             <label class="form-label">Account Size ($)</label>
-                            <input type="number" class="form-control" id="accountSize" value="135">
+                            <input type="number" class="form-control" id="accountSize" value="140">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Risk Percentage (%)</label>
-                            <input type="number" class="form-control" id="riskPercent" value="0.5">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="riskPercent" value="0.6" step="0.1">
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" id="onePercentToggle"
+                                        title="Use 1% risk">
+                                    &nbsp;Use 1%
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Stoploss Percentage (%)</label>
@@ -155,6 +163,22 @@
                             document.getElementById("positionSize").innerText = "$" + positionSize.toFixed(2);
                             document.getElementById("marginRequired").innerText = "$" + marginRequired.toFixed(2);
                         }
+
+                        const riskInput = document.getElementById("riskPercent");
+                        const onePercentToggle = document.getElementById("onePercentToggle");
+
+                        let originalRiskValue = riskInput.value;
+
+                        onePercentToggle.addEventListener("change", function () {
+                            if (this.checked) {
+                                originalRiskValue = riskInput.value;
+                                riskInput.value = 1;
+                            } else {
+                                riskInput.value = originalRiskValue;
+                            }
+                            calculateRisk(); // Re-calculate after check
+                        });
+
                     </script>
 
                 </div>
@@ -215,7 +239,8 @@
                             <li class="list-group-item highlight-green">TP4 (4R):
                                 <strong id="tp4Profit"></strong>
                             </li>
-                            <li class="list-group-item highlight-green-dark d-flex justify-content-between align-items-center">
+                            <li
+                                class="list-group-item highlight-green-dark d-flex justify-content-between align-items-center">
                                 <div>
                                     Lot Size:
                                     <strong id="lotSize"></strong>
@@ -227,10 +252,10 @@
                             </li>
                             <li class="list-group-item dark-row">Current Price: <strong id="pairPrice"></strong>
                             </li>
-                            <li class="list-group-item dark-row">Stoploss ($): <strong
-                                    id="stopLossDollar"></strong>
+                            <li class="list-group-item dark-row">Stoploss ($): <strong id="stopLossDollar"></strong>
                             </li>
-                            <li class="list-group-item highlight-blue">Margin Required: <strong id="requiredMargin"></strong>
+                            <li class="list-group-item highlight-blue">Margin Required: <strong
+                                    id="requiredMargin"></strong>
                             </li>
                             <li class="list-group-item highlight-blue">Fees (0.035%): <strong id="fees"></strong></li>
                             <li class="list-group-item text-muted">Last update: <strong id="lastUpdate"></strong>
