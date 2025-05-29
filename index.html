@@ -156,10 +156,10 @@
                             const marginRequired = positionSize / leverage;
 
                             document.getElementById("riskAmount").innerText = "$" + riskAmount.toFixed(2);
-                            document.getElementById("tpReward1").innerText = "$" + reward1.toFixed(2);
-                            document.getElementById("tpReward2").innerText = "$" + reward2.toFixed(2);
-                            document.getElementById("tpReward3").innerText = "$" + reward3.toFixed(2);
-                            document.getElementById("tpReward4").innerText = "$" + reward4.toFixed(2);
+                            document.getElementById("tpReward1").innerText = `$${reward1.toFixed(2)} (+${((reward1 / account) * 100).toFixed(1)}%)`;
+                            document.getElementById("tpReward2").innerText = `$${reward2.toFixed(2)} (+${((reward2 / account) * 100).toFixed(1)}%)`;
+                            document.getElementById("tpReward3").innerText = `$${reward3.toFixed(2)} (+${((reward3 / account) * 100).toFixed(1)}%)`;
+                            document.getElementById("tpReward4").innerText = `$${reward4.toFixed(2)} (+${((reward4 / account) * 100).toFixed(1)}%)`;
                             document.getElementById("positionSize").innerText = "$" + positionSize.toFixed(2);
                             document.getElementById("marginRequired").innerText = "$" + marginRequired.toFixed(2);
                         }
